@@ -1,0 +1,6 @@
+--find-links https://download.pytorch.org/whl/cpu
+torch --index-url https://download.pytorch.org/whl/cpu
+fastapi
+uvicorn
+transformers
+pydantic

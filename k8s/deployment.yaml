@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ml-inference-app
+  labels:
+    app: ml-inference-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ml-inference-app
+  template:
+    metadata:
+      labels:
+        app: ml-inference-app
+    spec:
+      containers:
+        - name: ml-inference-app
+          image: 697015998406.dkr.ecr.ap-south-1.amazonaws.com/ml-inference-app:latest
+          ports:
+            - containerPort: 8000
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "512Mi"
+            limits:
+              cpu: "500m"
+              memory: "1Gi"
