@@ -1,0 +1,36 @@
+# Virtual Environment
+.venv-wsl/
+venv/
+ENV/
+
+# Python Caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Docker & OS Files
+.DS_Store
+Thumbs.db
+
+# Local .terraform directories (cached modules and providers)
+**/.terraform/*
+
+# .tfstate files (Contains sensitive infrastructure runtime data)
+*.tfstate
+*.tfstate.*
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Terraform configuration overrides
+override.tf
+override.tf.json
+*__override.tf
+*__override.tf.json
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
