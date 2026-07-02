@@ -19,4 +19,9 @@ module "vpc" {
   private_subnet_tags = {
     "kubernetes.io/role/internal-elb" = "1"
   }
+
+  # Prevent accidental VPC replacement and dependency conflicts
+  lifecycle {
+    prevent_destroy = true
+  }
 }

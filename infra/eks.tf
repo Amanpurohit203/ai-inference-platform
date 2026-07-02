@@ -21,4 +21,10 @@ module "eks" {
 
   # Lets your IAM user manage the cluster via kubectl/aws-cli
   enable_cluster_creator_admin_permissions = true
+
+  # Manage auth and ensure proper cleanup order
+  manage_aws_auth = true
+
+  # Explicit dependency ensures VPC is ready
+  depends_on = [module.vpc]
 }
