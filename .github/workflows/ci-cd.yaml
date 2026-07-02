@@ -8,7 +8,7 @@ on:
 
 env:
   AWS_REGION: ap-south-1
-  ECR_REPOSITORY: ai-inference-app
+  ECR_REPOSITORY: ml-inference-app
   EKS_CLUSTER: ai-inference-cluster
 
 jobs:
