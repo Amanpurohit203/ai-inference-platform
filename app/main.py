@@ -1,8 +1,11 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from transformers import pipeline
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI(title="ML Inference Platform", version="1.0")
+
+Instrumentator().instrument(app).expose(app)
 
 # Load the model once at startup, not per-request
 sentiment_model = pipeline("sentiment-analysis")
