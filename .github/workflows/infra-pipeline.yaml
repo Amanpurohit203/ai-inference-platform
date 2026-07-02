@@ -38,10 +38,7 @@ jobs:
         run: terraform plan -out=tfplan
         continue-on-error: true
 
-      - name: Cleanup Deposed Resources
-        run: |
-         terraform refresh || true
-         terraform state list | grep deposed || true
+      
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
