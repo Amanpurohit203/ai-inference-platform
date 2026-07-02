@@ -42,7 +42,7 @@ jobs:
         run: terraform apply -auto-approve tfplan
 
       - name: Update kubeconfig
-        run: aws eks update-kubeconfig --name ml-inference-cluster --region ${{ env.AWS_REGION }}
+        run: aws eks update-kubeconfig --name ai-inference-cluster --region ${{ env.AWS_REGION }}
 
       - name: Install ArgoCD
         run: |
