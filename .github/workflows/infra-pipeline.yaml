@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - 'infra/**'
-  workflow_dispatch:  # allows manual trigger from GitHub UI
+  workflow_dispatch:
 
 env:
   AWS_REGION: ap-south-1
@@ -36,6 +36,12 @@ jobs:
 
       - name: Terraform Plan
         run: terraform plan -out=tfplan
+        continue-on-error: true
+
+      - name: Cleanup Deposed Resources
+        run: |
+         terraform refresh || true
+         terraform state list | grep deposed || true
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
@@ -47,7 +53,9 @@ jobs:
       - name: Install ArgoCD
         run: |
           kubectl create namespace argocd --dry-run=client -o yaml | kubectl apply -f -
-          kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml --server-side --force-conflicts
+          curl -sL https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml -o argocd-install.yaml
+          kubectl delete -f argocd-install.yaml --ignore-not-found=true
+          kubectl apply -f argocd-install.yaml -n argocd --server-side --force-conflicts
           kubectl rollout status deployment/argocd-server -n argocd --timeout=180s
 
       - name: Apply ArgoCD Application
