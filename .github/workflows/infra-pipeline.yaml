@@ -42,7 +42,7 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
-        run: terraform apply -auto-approve tfplan
+        run: terraform destroy -auto-approve 
 
       - name: Update kubeconfig
         run: aws eks update-kubeconfig --name ai-inference-cluster --region ${{ env.AWS_REGION }}
