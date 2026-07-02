@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: ml-inference-app
-          image: 697015998406.dkr.ecr.ap-south-1.amazonaws.com/ml-inference-app:397758129d23f2a002f7299ffac4574dfd08a8f8
+          image: 697015998406.dkr.ecr.ap-south-1.amazonaws.com/ml-inference-app:60635003eb295644970dc3eb5c20fa4ddc729773
           ports:
             - containerPort: 8000
           livenessProbe:
